@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Cards Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide"></script>
+  <script src="script.js" defer></script>
+  <style>
+    .modal-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+    .modal-scrollbar::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 3px;
+    }
+    .modal-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header and filters remain the same -->
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">Link Cards</h1>
+      <button
+        onclick="showForm()"
+        class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        <i data-lucide="plus-circle" class="w-5 h-5"></i>
+        Add Card
+      </button>
+    </div>
+
+    <div id="filters" class="mb-6 flex flex-wrap gap-2">
+      <button
+        onclick="filterCards('all')"
+        class="filter-btn px-4 py-2 rounded-lg bg-blue-600 text-white"
+        data-type="all"
+      >
+        All
+      </button>
+    </div>
+
+    <div id="cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Cards will be inserted here -->
+    </div>
+
+    <!-- Modal Form with overflow fixes -->
+    <div id="formModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center p-4 z-50 overflow-y-auto">
+      <div class="relative bg-white rounded-lg p-6 w-full max-w-md my-8">
+        <h2 id="formTitle" class="text-xl font-semibold mb-4">Add New Card</h2>
+        <form id="cardForm" onsubmit="handleSubmit(event)" class="space-y-4 modal-scrollbar overflow-y-auto max-h-[calc(100vh-12rem)]">
+          <input type="hidden" id="editId">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Title</label>
+            <input
+              type="text"
+              id="title"
+              required
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            >
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea
+              id="description"
+              rows="3"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            ></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Link</label>
+            <input
+              type="url"
+              id="link"
+              required
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            >
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Type</label>
+            <select
+              id="type"
+              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            >
+              <option value="website">Website</option>
+              <option value="youtube">YouTube</option>
+              <option value="blog">Blog</option>
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="instagram">Instagram</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="email">Email</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Thumbnail</label>
+            <div class="mt-1 space-y-2">
+              <input
+                type="file"
+                id="imageFile"
+                accept="image/*"
+                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              >
+              <div class="text-center text-sm text-gray-500">- or -</div>
+              <input
+                type="url"
+                id="imageUrl"
+                placeholder="Enter image URL"
+                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+              >
+            </div>
+          </div>
+          <div class="flex gap-2 justify-end mt-6">
+            <button
+              type="button"
+              onclick="hideForm()"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
