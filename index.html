@@ -28,7 +28,7 @@
   </style>
 </head>
 <body class="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto pb-16">
     <!-- Header and filters remain the same -->
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-gray-900">Link At Blink</h1>
@@ -134,5 +134,33 @@
       </div>
     </div>
   </div>
+
+  <!-- Info Button at Bottom Right -->
+  <button onclick="showInfo()" class="fixed bottom-4 right-4 bg-blue-600 text-white p-0 rounded-full shadow-lg hover:bg-blue-900 transition z-50">
+    <i data-lucide="circle-help" class="w-9 h-9"></i>
+  </button>
+
+  <!-- Info Modal -->
+  <div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
+      <h2 class="text-xl font-semibold mb-4">Why you should Use this website 🤔?</h2>
+      <p class="text-gray-700">You must be tired from yourself by your scrolling behaviour on youtube and other social media... <br>So, just quit it now and add essential channels or articles link here if it's needed.</p>
+      <div class="mt-4 flex justify-end">
+        <button onclick="hideInfo()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showInfo() {
+      document.getElementById('infoModal').classList.remove('hidden');
+    }
+
+    function hideInfo() {
+      document.getElementById('infoModal').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>
