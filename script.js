@@ -95,18 +95,7 @@ function handleSubmit(event) {
     createdAt: editingId ? cards.find(c => c.id === editingId).createdAt : new Date().toISOString()
   };
 
-  // Handle file upload
-  const fileInput = document.getElementById('imageFile');
-  if (fileInput.files.length > 0) {
-    const reader = new FileReader();
-    reader.onloadend = function() {
-      formData.image = reader.result;
-      saveCard(formData);
-    };
-    reader.readAsDataURL(fileInput.files[0]);
-  } else {
-    saveCard(formData);
-  }
+  saveCard(formData);
 }
 
 // Save card data
@@ -156,7 +145,7 @@ function renderCards() {
     : cards.filter(card => card.type === activeFilter);
 
   if (filteredCards.length === 0) {
-    container.innerHTML = `
+    container.innerHTML = ` 
       <div class="col-span-full text-center py-12">
         <p class="text-gray-500">
           ${activeFilter === 'all' 
@@ -176,8 +165,7 @@ function renderCards() {
             src="${card.image}"
             alt="${card.title}"
             class="w-full h-full object-cover"
-            onerror="this.src='https://via.placeholder.com/400x225?text=No+Image'"
-          >
+            onerror="this.src='https://via.placeholder.com/400x225?text=No+Image'">
         </div>
       ` : ''}
       <div class="p-6">
