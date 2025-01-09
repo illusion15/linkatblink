@@ -5,7 +5,7 @@ let editingId = null;
 
 // Card types configuration
 const cardTypes = [
-  'website', 'youtube', 'blog', 'facebook', 
+  'youtube', 'website', 'blog', 'facebook', 
   'twitter', 'instagram', 'linkedin', 'email', 'other'
 ];
 
@@ -158,7 +158,7 @@ function renderCards() {
   }
 
   container.innerHTML = filteredCards.map(card => `
-    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div class="card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-id="${card.id}">
       ${card.image ? `
         <div class="aspect-video bg-gray-100">
           <img
@@ -213,8 +213,23 @@ function renderCards() {
       </div>
     </div>
   `).join('');
-  
+
   lucide.createIcons();
+  initializeSortable();
+}
+
+// Initialize sortable functionality
+function initializeSortable() {
+  const container = document.getElementById('cards');
+
+  Sortable.create(container, {
+    animation: 150,
+    onEnd: event => {
+      const newOrder = Array.from(container.children).map(card => card.getAttribute('data-id'));
+      cards = newOrder.map(id => cards.find(card => card.id === id));
+      localStorage.setItem('cards', JSON.stringify(cards));
+    }
+  });
 }
 
 // Wait for DOM to be loaded before initializing
