@@ -177,11 +177,11 @@ function renderCards() {
             </span>
           </div>
           <div class="flex gap-2">
-            <button
+            <!-- <button
               class="drag-handle p-1 text-gray-500 cursor-move hover:text-gray-700 transition-colors"
               title="Drag to reorder">
               <i data-lucide="move" class="w-5 h-5"></i>
-            </button>
+            </button> -->
             <button
               onclick="editCard('${card.id}')"
               class="p-1 text-gray-500 hover:text-blue-600 transition-colors"

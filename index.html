@@ -136,32 +136,110 @@
     </div>
   </div>
 
-  <!-- Info Button at Bottom Right -->
-  <button onclick="showInfo()" class="fixed bottom-4 right-4 bg-blue-600 text-white p-0 rounded-full shadow-lg hover:bg-blue-900 transition z-50">
-    <i data-lucide="circle-help" class="w-9 h-9"></i>
-  </button>
+ <!-- Option Button at Bottom Right -->
+<button onclick="toggleOptions()" id="gripButton" class="fixed bottom-4 right-4 bg-blue-600 text-white p-[0.5rem] rounded-full shadow-lg hover:bg-blue-900 transition z-50">
+  <i data-lucide="grip" class="w-5 h-5"></i>
+</button>
 
-  <!-- Info Modal -->
-  <div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-    <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
-      <h2 class="text-xl font-semibold mb-4">Why you should Use this website 🤔?</h2>
-      <p class="text-gray-700">You must be tired by yourself from your scrolling behaviour on youtube and other social media... <br>So, just quit it now and add essential channels or articles link here if it's needed. And remove all your FOMO that you will miss something.</p>
-      <div class="mt-4 flex justify-end">
-        <button onclick="hideInfo()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
-          Close
-        </button>
-      </div>
+<!-- Delete All Data Button -->
+<button id="deleteButton" onclick="confirm('Do you really want to delete all data?') && localStorage.removeItem('cards');" 
+  class="hidden fixed bottom-14 right-4 bg-blue-600 text-white p-[0.45rem] rounded-full shadow-lg hover:bg-blue-900 transition opacity-0 transform scale-75 z-50">
+  <i data-lucide="trash-2" class="w-4 h-4"></i>
+</button>
+
+<!-- Info Button -->
+<button id="infoButton" onclick="showInfo()" 
+  class="hidden fixed bottom-[2.8rem] right-12 bg-blue-600 text-white p-0 rounded-full shadow-lg hover:bg-blue-900 transition opacity-0 transform scale-75 z-50">
+  <i data-lucide="circle-help" class="w-7 h-7"></i>
+</button>
+
+<!-- Contact Button -->
+<button id="contactButton" onclick="showContact()" 
+  class="hidden fixed bottom-[0.6rem] right-[3.2rem] bg-blue-600 text-white p-[0.5rem] rounded-full shadow-lg hover:bg-blue-900 transition opacity-0 transform scale-75 z-50">
+  <i data-lucide="user" class="w-5 h-5"></i>
+</button>
+
+<!-- Info Modal -->
+<div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+  <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
+    <h2 class="text-xl font-semibold mb-4">Why you should use this website 🤔?</h2>
+    <p class="text-gray-700">You must be tired from scrolling endlessly on YouTube and other social media. Quit now and add essential channels or articles links here to stay focused. Remove the fear of missing out (FOMO).</p>
+    <div class="mt-4 flex justify-end">
+      <button onclick="hideInfo()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
+        Close
+      </button>
     </div>
   </div>
-  
-  <script>
-    function showInfo() {
-      document.getElementById('infoModal').classList.remove('hidden');
-    }
+</div>
 
-    function hideInfo() {
-      document.getElementById('infoModal').classList.add('hidden');
+<!-- Contact Modal -->
+<div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+  <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
+    <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
+    <p class="text-gray-700">Name: Priyanshu<br>Email: itzpiyanshu15@gmail.com<br>Phone: 9341271973</p>
+    <div class="mt-4 flex justify-end">
+      <button onclick="hideContact()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let optionsVisible = false;
+
+  function toggleOptions() {
+    optionsVisible = !optionsVisible;
+
+    // Select buttons
+    const deleteButton = document.getElementById('deleteButton');
+    const infoButton = document.getElementById('infoButton');
+    const contactButton = document.getElementById('contactButton');
+
+    // Toggle visibility with animation
+    if (optionsVisible) {
+      deleteButton.classList.remove('hidden');
+      infoButton.classList.remove('hidden');
+      contactButton.classList.remove('hidden');
+
+      // Start animation
+      setTimeout(() => {
+        deleteButton.classList.remove('opacity-0', 'scale-75');
+        infoButton.classList.remove('opacity-0', 'scale-75');
+        contactButton.classList.remove('opacity-0', 'scale-50');
+      }, 10);
+    } else {
+      // Hide with animation
+      deleteButton.classList.add('opacity-0', 'scale-75');
+      infoButton.classList.add('opacity-0', 'scale-75');
+      contactButton.classList.add('opacity-0', 'scale-50');
+
+      // Delay hiding to allow animation to complete
+      setTimeout(() => {
+        deleteButton.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        contactButton.classList.add('hidden');
+      }, 300); // Match the transition duration
     }
-  </script>
+  }
+
+  function showInfo() {
+    document.getElementById('infoModal').classList.remove('hidden');
+  }
+
+  function hideInfo() {
+    document.getElementById('infoModal').classList.add('hidden');
+  }
+
+  function showContact() {
+    document.getElementById('contactModal').classList.remove('hidden');
+  }
+
+  function hideContact() {
+    document.getElementById('contactModal').classList.add('hidden');
+  }
+</script>
+
+
 </body>
 </html>
