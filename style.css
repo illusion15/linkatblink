@@ -1,0 +1,53 @@
+.modal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+
+body.dark-mode {
+background-color: #1a202c;
+color: #f7fafc;
+}
+body.dark-mode .filter-btn {
+background-color: #2d3748;
+color: #f7fafc;
+}
+body.dark-mode .night-card {
+background-color: #2d3748;
+}
+body.dark-mode .header {
+color: #f7fafc;
+}
+body.dark-mode .sec-text {
+color: #ccd0da;
+}
+body.dark-mode .ter-text {
+background-color: #1a202c;
+color: #f7fafc;
+border-color: #4a5568;
+}
+body.dark-mode .ter-text:focus {
+border-color: #ccd0da;
+}
+body.dark-mode .nigtfilter-btn {
+background-color: #2563eb;
+}
+body.dark-mode .DayNightBtn {
+background-color: #fdf5ae;
+}
+body.dark-mode .modal-scrollbar::-webkit-scrollbar-track {
+background: #2d3748;
+}
+body.dark-mode .modal-scrollbar::-webkit-scrollbar-thumb {
+background: #4a5568;
+}

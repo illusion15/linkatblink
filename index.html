@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Link At Blink</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://w7.pngwing.com/pngs/195/992/png-transparent-bookmark-computer-icons-bookmark-miscellaneous-angle-rectangle-thumbnail.png" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet">
@@ -11,37 +12,32 @@
   <script src="script.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
-  <style>
-    .modal-scrollbar::-webkit-scrollbar {
-      width: 6px;
-    }
-    .modal-scrollbar::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 3px;
-    }
-    .modal-scrollbar::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 3px;
-    }
-    .modal-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #666;
-    }
-  </style>
 </head>
 <body class="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
   <div class="max-w-6xl mx-auto pb-16">
     <!-- Header and filters remain the same -->
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Link At Blink</h1>
-      <button
-        onclick="showForm()"
-        class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        <i data-lucide="plus-circle" class="w-5 h-5"></i>
-        Add Card
-      </button>
-    </div>
+      <h1 class="header text-3xl font-bold text-gray-800">Link At Blink</h1>
 
+      <div class="flex gap-2">
+        <!--DAY & NIGHT MODE-->
+        <button
+        onclick="toggleDarkMode()"
+        id="themeToggle"
+        class="DayNightBtn flex items-center gap-2 bg-gray-300 text-gray-800 px-2 py-2 border-none rounded-full hover:bg-gray-400 transition-colors"
+        >
+        <i data-lucide="sun-moon" class="w-5 h-5"></i>
+        </button>
+
+        <button
+          onclick="showForm()"
+          class="flex items-center gap-1 bg-blue-600 text-xs text-white px-2 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          Add Card
+        </button>
+      </div>
+    </div>
     <div id="filters" class="mb-6 flex flex-wrap gap-2">
       <button
         onclick="filterCards('all')"
@@ -58,41 +54,41 @@
 
     <!-- Modal Form with overflow fixes -->
     <div id="formModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center p-4 z-50 overflow-y-auto">
-      <div class="relative bg-white rounded-lg p-6 w-full max-w-md my-8">
-        <h2 id="formTitle" class="text-xl font-semibold mb-4">Add New Card</h2>
+      <div class="night-card relative bg-white rounded-lg p-6 w-full max-w-md my-8">
+        <h2 id="formTitle" class="header text-xl font-semibold mb-4 text-blue-600">Add New Card</h2>
         <form id="cardForm" onsubmit="handleSubmit(event)" class="space-y-4 modal-scrollbar overflow-y-auto max-h-[calc(100vh-12rem)]">
           <input type="hidden" id="editId">
           <div>
-            <label class="block text-sm font-medium text-gray-700">Title</label>
+            <label class="sec-text block text-sm font-medium text-gray-700">Title</label>
             <input
               type="text"
               id="title"
               required
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+              class="ter-text mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             >
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <label class="sec-text block text-sm font-medium text-gray-700">Description</label>
             <textarea
               id="description"
               rows="3"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+              class="ter-text mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             ></textarea>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Link</label>
+            <label class="sec-text block text-sm font-medium text-gray-700">Link</label>
             <input
               type="url"
               id="link"
               required
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+              class="ter-text mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             >
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Type</label>
+            <label class="sec-text block text-sm font-medium text-gray-700">Type</label>
             <select
               id="type"
-              class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+              class="ter-text mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             >
               <option value="website">Website</option>
               <option value="youtube">YouTube</option>
@@ -106,13 +102,13 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Thumbnail</label>
+            <label class="sec-text block text-sm font-medium text-gray-700">Thumbnail</label>
             <div class="mt-1 space-y-2">
               <input
                 type="url"
                 id="imageUrl"
                 placeholder="Enter image URL"
-                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+                class="ter-text mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
               >
             </div>
           </div>
@@ -137,7 +133,7 @@
   </div>
 
  <!-- Option Button at Bottom Right -->
-<button onclick="toggleOptions()" id="gripButton" class="fixed bottom-4 right-4 bg-blue-600 text-white p-[0.5rem] rounded-full shadow-lg hover:bg-blue-900 transition z-50">
+<button onclick="toggleOptions()" id="gripButton" class="fixed bottom-4 right-4 bg-blue-600 text-white p-[0.5rem] rounded-full shadow-lg hover:bg-blue-900 focus:bg-red-500 transition z-50">
   <i data-lucide="grip" class="w-5 h-5"></i>
 </button>
 
@@ -161,9 +157,9 @@
 
 <!-- Info Modal -->
 <div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-  <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
+  <div class="night-card relative bg-white rounded-lg p-6 w-full max-w-md">
     <h2 class="text-xl font-semibold mb-4">Why you should use this website 🤔?</h2>
-    <p class="text-gray-700">You must be tired from scrolling endlessly on YouTube and other social media. Quit now and add essential channels or articles links here to stay focused. Remove the fear of missing out (FOMO).</p>
+    <p class="sec-text text-gray-700">You must be tired from scrolling endlessly on YouTube and other social media. Quit now and add essential channels or articles links here to stay focused. Remove the fear of missing out (FOMO).</p>
     <div class="mt-4 flex justify-end">
       <button onclick="hideInfo()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
         Close
@@ -174,9 +170,9 @@
 
 <!-- Contact Modal -->
 <div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-  <div class="relative bg-white rounded-lg p-6 w-full max-w-md">
+  <div class="night-card relative bg-white rounded-lg p-6 w-full max-w-md">
     <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
-    <p class="text-gray-700">Name: Priyanshu<br>Email: itzpiyanshu15@gmail.com<br>Phone: 9341271973</p>
+    <p class="sec-text text-gray-700">Name: Priyanshu<br>Email: itzpiyanshu15@gmail.com<br>Phone: 9341271973</p>
     <div class="mt-4 flex justify-end">
       <button onclick="hideContact()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">
         Close

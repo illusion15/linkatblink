@@ -61,7 +61,7 @@ function updateFilterButtons() {
     const isActive = btn.getAttribute('data-type') === activeFilter;
     btn.className = `filter-btn px-4 py-2 rounded-lg flex items-center gap-2 ${
       isActive
-        ? 'bg-blue-600 text-white'
+        ? 'nigtfilter-btn bg-blue-600 text-white'
         : 'bg-white text-gray-600 hover:bg-gray-100'
     }`;
   });
@@ -158,7 +158,7 @@ function renderCards() {
   }
 
   container.innerHTML = filteredCards.map(card => `
-    <div class="card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-id="${card.id}">
+    <div class="night-card card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-id="${card.id}">
       ${card.image ? `
         <div class="aspect-video bg-gray-100">
           <img
@@ -196,11 +196,11 @@ function renderCards() {
             </button>
           </div>
         </div>
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">
+        <h3 class="header text-lg font-semibold text-gray-900 mb-2">
           ${card.title}
         </h3>
         ${card.description ? `
-          <p class="text-gray-600 mb-4 line-clamp-2">${card.description}</p>
+          <p class="sec-text text-gray-600 mb-4 line-clamp-2">${card.description}</p>
         ` : ''}
         <div class="flex items-center justify-between">
           <span class="text-xs text-gray-500">
@@ -244,3 +244,40 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCards();
   lucide.createIcons();
 });
+
+
+
+// DAY & NIGHT MODE:
+// Check and apply saved theme
+document.addEventListener('DOMContentLoaded', () => {
+  const theme = localStorage.getItem('theme') || 'light';
+  if (theme === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+  updateThemeToggle();
+});
+
+// Toggle dark mode
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  updateThemeToggle();
+}
+
+// Update toggle button text and icon
+function updateThemeToggle() {
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeToggle = document.getElementById('themeToggle');
+
+  // Update the icon type and button styles
+  themeIcon.setAttribute('data-lucide', isDarkMode ? 'moon' : 'sun');
+  themeToggle.classList.toggle('bg-gray-200', !isDarkMode);
+  themeToggle.classList.toggle('bg-gray-800', isDarkMode);
+  themeToggle.classList.toggle('text-gray-800', !isDarkMode);
+  themeToggle.classList.toggle('text-white', isDarkMode);
+
+  // Re-render icons
+  lucide.createIcons();
+}
